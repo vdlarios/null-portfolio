@@ -5,9 +5,11 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 //Allow frontend (Vite dev server) to call this API
-app.use(cors({
-    origin: "http://localhost:5173"
-}));
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://null-portfolio.onrender.com"],
+  })
+);
 
 // Middleware to parse JSON bodies (for later)
 app.use(express.json());

@@ -1,5 +1,6 @@
 // src/pages/HomePage.tsx
 import { useArtworks } from "../context/ArtworksContext";
+import { ArtworkGallery } from "../components/gallery/ArtworkGallery";
 
 export function HomePage() {
   const { artworks, loading, error } = useArtworks();
@@ -18,16 +19,17 @@ export function HomePage() {
   }
   return (
     <div>
+
       <div className="hero-image w-full">
         <img
           src="art/nexus.png"
           alt="Featured artwork"
-          className="w-full max-h-[60vh] object-cover block"
+          className="w-full max-h-[60vh] min-h-[45vh] object-cover block"
         />
       </div>
 
-      <div className="container px-6">
-        <header className="mb-4 mt-4">
+      <div className="px-1 w-full">
+        <header className="px-2 mb-4 mt-4">
           <h1 className="text-3xl mb-1 text-white font-bold">
             Null — Art Portfolio
           </h1>
@@ -36,35 +38,7 @@ export function HomePage() {
           </p>
         </header>
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-6">
-          {artworks.map((art) => (
-            <article
-              key={art.id}
-              className="bg-gray-900 rounded-xl overflow-hidden shadow-lg"
-            >
-              <div className="overflow-hidden rounded-lg">
-                <img
-                  src={art.thumbnailUrl}
-                  alt={art.title}
-                  className="w-full h-64 object-cover block"
-                />
-              </div>
-              <div className="p-3">
-                <h2 className="text-base mb-1 text-white font-medium">
-                  {art.title}
-                </h2>
-                {art.year && (
-                  <p className="text-xs text-gray-500">{art.year}</p>
-                )}
-                {art.description && (
-                  <p className="mt-2 text-sm text-gray-400">
-                    {art.description}
-                  </p>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
+        <ArtworkGallery artworks={artworks} />
       </div>
     </div>
   );

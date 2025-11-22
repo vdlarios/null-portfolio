@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 4000;
 //Allow frontend (Vite dev server) to call this API
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://null-portfolio-chi.vercel.app"],
+    origin: ["http://localhost:5173", "https://null-portfolio.netlify.app"],
   })
 );
 

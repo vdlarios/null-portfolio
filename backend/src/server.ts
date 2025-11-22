@@ -1,13 +1,23 @@
 // src/server.ts
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const app = express();
+
+const NODE_ENV = process.env.NODE_ENV || "development";
 const PORT = process.env.PORT || 4000;
+
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
 //Allow frontend (Vite dev server) to call this API
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://null-portfolio.netlify.app"],
+    origin: FRONTEND_URL,
+    // or origin: FRONTEND_URLS
+    credentials: true,
   })
 );
 
@@ -76,6 +86,8 @@ app.get("/api/artworks", (_req, res) => {
   res.json(artworks);
 });
 
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT} (${NODE_ENV})`);
+  console.log(`Allowed frontend origin: ${FRONTEND_URL}`);
 });
